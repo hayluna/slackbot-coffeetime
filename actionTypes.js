@@ -1,0 +1,8 @@
+const ACTION_TYPES = {
+  UNLOCK: 'UNLOCK',
+  LOCK: 'LOCK',
+  SET_START_DATE: 'SET_START_DATE',
+  SET_END_DATE: 'SET_END_DATE',
+};
+
+module.exports = { ACTION_TYPES };
