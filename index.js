@@ -1,10 +1,10 @@
 require('dotenv').config();
 const { App } = require('@slack/bolt');
-
-const { ACTION_TYPES } = require('./actionTypes');
-const { view } = require('./view');
-const { appointment } = require('./appointment');
 const { addDays, isBefore } = require('date-fns');
+
+const { ACTION_TYPES } = require('./src/constants/actionTypes');
+const { view } = require('./src/view');
+const { appointment } = require('./src/appointment');
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -27,7 +27,6 @@ app.action(ACTION_TYPES.SET_START_DATE, async ({ ack, payload }) => {
 app.action(
   ACTION_TYPES.SET_END_DATE,
   async ({
-    say,
     ack,
     payload,
     body: {
@@ -47,22 +46,19 @@ app.action(
   }
 );
 
-app.action(
-  ACTION_TYPES.UNLOCK,
-  async ({ say, ack, body: { channel, user } }) => {
-    await ack();
-    appointment.startDate = new Date();
-    appointment.endDate = addDays(new Date(), 14);
-    appointment.isLocked = false;
+app.action(ACTION_TYPES.UNLOCK, async ({ ack, body: { channel, user } }) => {
+  await ack();
+  appointment.startDate = new Date();
+  appointment.endDate = addDays(new Date(), 14);
+  appointment.isLocked = false;
 
-    await app.client.chat.postEphemeral({
-      channel: channel.id,
-      token: process.env.SLACK_BOT_TOKEN,
-      user: user.id,
-      blocks: view.날짜세팅안내(),
-    });
-  }
-);
+  await app.client.chat.postEphemeral({
+    channel: channel.id,
+    token: process.env.SLACK_BOT_TOKEN,
+    user: user.id,
+    blocks: view.날짜세팅안내(),
+  });
+});
 
 app.action(
   ACTION_TYPES.LOCK,

@@ -1,4 +1,4 @@
-const { app } = require('./index');
+const { app } = require('../index');
 
 class MessageChannel {
   constructor() {

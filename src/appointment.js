@@ -1,5 +1,5 @@
 const { addDays } = require('date-fns');
-const { members } = require('./members');
+const { members } = require('./constants/members');
 
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);

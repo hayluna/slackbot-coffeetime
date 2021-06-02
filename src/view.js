@@ -1,6 +1,6 @@
-const { members } = require('./members');
+const { members } = require('./constants/members');
 const { format } = require('date-fns');
-const { ACTION_TYPES } = require('./actionTypes');
+const { ACTION_TYPES } = require('./constants/actionTypes');
 const { appointment } = require('./appointment');
 
 const view = {
