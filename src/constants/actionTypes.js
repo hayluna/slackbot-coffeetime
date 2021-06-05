@@ -1,8 +1,8 @@
 const ACTION_TYPES = {
-  UNLOCK: 'UNLOCK',
-  LOCK: 'LOCK',
-  SET_START_DATE: 'SET_START_DATE',
-  SET_END_DATE: 'SET_END_DATE',
+  잠금해제: '잠금해제',
+  잠금: '잠금',
+  시작날짜설정: '시작날짜설정',
+  마지막날짜설정: '마지막날짜설정',
 };
 
 module.exports = { ACTION_TYPES };
