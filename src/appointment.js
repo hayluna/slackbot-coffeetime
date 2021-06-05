@@ -6,6 +6,7 @@ function shuffle(array) {
 }
 
 const CORONA_LIMIT = 4;
+const 요일 = ['월', '화', '수', '목', '금'];
 
 class Appointment {
   constructor() {
@@ -22,7 +23,7 @@ class Appointment {
   get groupToString() {
     return this.groupWithMark.map(
       (group, idx) =>
-        `*:coffee: ${group.join(' ')}${
+        `*:coffee: ${요일[idx % 5]}요일 : ${group.join(' ')}${
           idx < this.groupWithMark.length - 1 ? '*\n' : ''
         }`
     );
