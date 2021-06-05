@@ -61,17 +61,11 @@ app.action(ACTION_TYPES.시작날짜설정, async ({ ack, payload }) => {
 
 app.action(
   ACTION_TYPES.마지막날짜설정,
-  async ({
-    ack,
-    payload,
-    body: {
-      channel: { id },
-    },
-  }) => {
+  async ({ ack, payload, body: { channel } }) => {
     await ack();
     if (appointment.isLocked) {
       await app.client.chat.postMessage({
-        channel: id,
+        channel: channel.id,
         token: process.env.SLACK_BOT_TOKEN,
         blocks: view.잠금안내(),
       });
@@ -87,10 +81,9 @@ app.action(ACTION_TYPES.잠금해제, async ({ ack, body: { channel, user } }) =
   appointment.endDate = addDays(new Date(), 14);
   appointment.isLocked = false;
 
-  await app.client.chat.postEphemeral({
+  await app.client.chat.postMessage({
     channel: channel.id,
     token: process.env.SLACK_BOT_TOKEN,
-    user: user.id,
     blocks: view.날짜세팅안내(),
   });
 });
