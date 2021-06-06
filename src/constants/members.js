@@ -14,4 +14,6 @@ const members = [
   '구주승',
 ];
 
-module.exports = { members };
+const memberSet = new Set([...members]);
+
+module.exports = { members, memberSet };

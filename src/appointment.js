@@ -1,5 +1,5 @@
 const { addDays } = require('date-fns');
-const { members } = require('./constants/members');
+const { coffeeMemberMap } = require('./coffeeMember');
 
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
@@ -13,43 +13,32 @@ class Appointment {
     this.isLocked = false;
     this.startDate = new Date();
     this.endDate = addDays(this.startDate, 14);
-    const { groupedMembers, groupedMembersWithMark } =
-      this.getShuffledGroup(members);
-
-    this.groups = groupedMembers;
-    this.groupWithMark = groupedMembersWithMark;
+    this.shuffleGroup();
   }
 
-  get groupToString() {
-    return this.groupWithMark.map(
-      (group, idx) =>
-        `*:coffee: ${요일[idx % 5]}요일 : ${group.join(' ')}${
-          idx < this.groupWithMark.length - 1 ? '*\n' : ''
-        }`
+  get scheduleToPrint() {
+    return this.groupsWithWeek.map(
+      (groupWeekStr, idx) =>
+        `*:coffee: ${groupWeekStr}${idx < this.groups.length - 1 ? '*\n' : ''}`
     );
   }
 
-  getShuffledGroup() {
+  get groupsWithWeek() {
+    return this.groups
+      .map((group) => group.map((member) => `<@${member.id}>`))
+      .map((group, idx) => `${요일[idx % 5]}요일 : ${group.join(' ')}`);
+  }
+
+  shuffleGroup() {
+    const members = [...coffeeMemberMap.values()];
     const shuffledMembers = shuffle(members);
     const maxGroupCount = Math.ceil(members.length / CORONA_LIMIT);
     const groupedMembers = Array.from({ length: maxGroupCount }, () => []);
-    const groupedMembersWithMark = Array.from(
-      { length: maxGroupCount },
-      () => []
-    );
 
     shuffledMembers.forEach((member, index) => {
       groupedMembers[index % maxGroupCount].push(member);
-      groupedMembersWithMark[index % maxGroupCount].push(`${member}`);
     });
-    return { groupedMembers, groupedMembersWithMark };
-  }
-
-  setShuffledGroup() {
-    const { groupedMembers, groupedMembersWithMark } = this.getShuffledGroup();
-
     this.groups = groupedMembers;
-    this.groupWithMark = groupedMembersWithMark;
   }
 }
 
