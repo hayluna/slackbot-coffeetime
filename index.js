@@ -38,9 +38,11 @@ app.command('/coffee', async ({ command, ack, say }) => {
             return;
           }
 
-          await app.client.chat.postMessage({
+          //postMessage
+          await app.client.chat.postEphemeral({
             channel: command.channel_id,
             token: process.env.SLACK_BOT_TOKEN,
+            user: command.user_id,
             blocks: view.날짜세팅안내(),
           });
           return;
@@ -142,32 +144,39 @@ app.command('/coffee', async ({ command, ack, say }) => {
 });
 
 // action listener
-app.action(ACTION_TYPES.시작날짜설정, async ({ ack, payload }) => {
-  try {
-    await ack();
-    if (appointment.isLocked) {
-      await app.client.chat.postMessage({
-        channel: id,
-        token: process.env.SLACK_BOT_TOKEN,
-        blocks: view.잠금안내(),
-      });
-      return;
-    }
-    appointment.startDate = new Date(payload.selected_date);
-  } catch (e) {
-    console.log('잠금안내 에러', e);
-  }
-});
-
 app.action(
-  ACTION_TYPES.마지막날짜설정,
-  async ({ ack, payload, body: { channel } }) => {
+  ACTION_TYPES.시작날짜설정,
+  async ({ ack, payload, body: { user } }) => {
     try {
       await ack();
       if (appointment.isLocked) {
-        await app.client.chat.postMessage({
+        //postMessage
+        await app.client.chat.postEphemeral({
+          channel: id,
+          token: process.env.SLACK_BOT_TOKEN,
+          user: user.id,
+          blocks: view.잠금안내(),
+        });
+        return;
+      }
+      appointment.startDate = new Date(payload.selected_date);
+    } catch (e) {
+      console.log('잠금안내 에러', e);
+    }
+  }
+);
+
+app.action(
+  ACTION_TYPES.마지막날짜설정,
+  async ({ ack, payload, body: { channel, user } }) => {
+    try {
+      await ack();
+      if (appointment.isLocked) {
+        //postMessage
+        await app.client.chat.postEphemeral({
           channel: channel.id,
           token: process.env.SLACK_BOT_TOKEN,
+          user: user.id,
           blocks: view.잠금안내(),
         });
         return;
@@ -186,9 +195,11 @@ app.action(ACTION_TYPES.잠금해제, async ({ ack, body: { channel, user } }) =
     appointment.endDate = addDays(new Date(), 14);
     appointment.isLocked = false;
 
-    await app.client.chat.postMessage({
+    //postMessage
+    await app.client.chat.postEphemeral({
       channel: channel.id,
       token: process.env.SLACK_BOT_TOKEN,
+      user: user.id,
       blocks: view.날짜세팅안내(),
     });
   } catch (e) {
@@ -203,6 +214,7 @@ app.action(
     ack,
     body: {
       channel: { id },
+      user,
     },
   }) => {
     try {
@@ -214,18 +226,22 @@ app.action(
       appointment.isLocked = true;
       appointment.shuffleGroup();
 
-      await app.client.chat.postMessage({
+      //postMessage
+      await app.client.chat.postEphemeral({
         channel: id,
         token: process.env.SLACK_BOT_TOKEN,
         blocks: view.커피타임안내(),
+        user: user.id,
         text: '새로운 커피타임이 설정되었습니다',
       });
 
       appointment.groupsWithWeek.forEach(async (groupWeekStr) => {
-        await app.client.chat.postMessage({
+        //postMessage
+        await app.client.chat.postEphemeral({
           channel: id,
           token: process.env.SLACK_BOT_TOKEN,
           blocks: view.그룹모임메세지(groupWeekStr),
+          user: user.id,
         });
       });
     } catch (e) {
