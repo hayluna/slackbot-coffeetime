@@ -235,7 +235,7 @@ app.action(
         text: '새로운 커피타임이 설정되었습니다',
       });
 
-      appointment.groupsWithWeek.forEach(async (groupWeekStr) => {
+      for (const groupWeekStr of appointment.groupsWithWeek) {
         //postMessage
         await app.client.chat.postEphemeral({
           channel: id,
@@ -243,7 +243,7 @@ app.action(
           blocks: view.그룹모임메세지(groupWeekStr),
           user: user.id,
         });
-      });
+      }
     } catch (e) {
       console.log('잠금에러', e);
     }
