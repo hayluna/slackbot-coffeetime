@@ -12,6 +12,7 @@ const members = [
   '신제훈',
   'Junseok Oh',
   '구주승',
+  '노기진',
 ];
 
 const memberSet = new Set([...members]);
