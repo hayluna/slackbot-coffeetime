@@ -228,6 +228,24 @@ const view = {
       },
     },
   ],
+  로그: (text) => [
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text,
+      },
+    },
+  ],
+  도움말: () => [
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `/coffee init : 멤버 등록. set이전에 init하셔야합니다.\n/coffee set : 커피타임 설정\n/coffee channel : 현재 채널 정보\n/coffee member : 현재 유저 정보`,
+      },
+    },
+  ],
 };
 
 module.exports = { view };
