@@ -183,7 +183,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
                     channel: process.env.SLACK_CHANNEL_ID_TEST,
                     token: process.env.SLACK_BOT_TOKEN,
                     blocks: view.로그(
-                      `채널 ${command.channel_name}에서 @${command.user_name}쌤이 채널을 조회하셨습니다.\n채널 아이디 : ${command.channel_id}\n유저 아이디 : ${command.user_id}\n유저 이름: <@${command.user_id}`
+                      `채널 ${command.channel_name}에서 @${command.user_name}쌤이 채널을 조회하셨습니다.\n채널 아이디 : ${command.channel_id}\n유저 아이디 : ${command.user_id}\n유저 이름: ${command.user_name}`
                     ),
                   });
                 }
