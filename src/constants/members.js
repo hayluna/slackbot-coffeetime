@@ -15,6 +15,7 @@ const members = [
   '노기진',
   '유시온',
   '이진혁',
+  '조충근',
 ];
 
 const memberSet = new Set([...members]);
