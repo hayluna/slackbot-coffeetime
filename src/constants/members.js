@@ -19,5 +19,8 @@ const members = [
 ];
 
 const memberSet = new Set([...members]);
+const excludedMembers = ['권기성', '김동기'];
 
-module.exports = { members, memberSet };
+const excludedMemberSet = new Set([...excludedMembers]);
+
+module.exports = { members, memberSet, excludedMemberSet };

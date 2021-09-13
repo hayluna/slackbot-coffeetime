@@ -6,7 +6,7 @@ const { ACTION_TYPES } = require('./src/constants/actionTypes');
 const { view } = require('./src/view');
 const { appointment } = require('./src/appointment');
 const { CoffeeMember, coffeeMemberMap } = require('./src/coffeeMember');
-const { memberSet } = require('./src/constants/members');
+const { excludedMemberSet } = require('./src/constants/members');
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -110,7 +110,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
                     name: user.real_name,
                     profileImg: user.profile.image_original,
                   });
-                  if (memberSet.has(member.name)) {
+                  if (!excludedMemberSet.has(member.name)) {
                     coffeeMemberMap.set(member.id, member);
                   }
                 });
