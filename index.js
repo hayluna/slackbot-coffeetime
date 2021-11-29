@@ -73,10 +73,10 @@ app.command('/coffee', async ({ command, ack, say }) => {
           appointment.startDate = new Date();
           appointment.endDate = addDays(appointment.startDate, 14);
 
-          await app.client.chat.postMessage({
+          await app.client.chat.postEphemeral({
             channel: command.channel_id,
             token: process.env.SLACK_BOT_TOKEN,
-            // user: command.user_id,
+            user: command.user_id,
             blocks: view.날짜세팅안내(),
           });
           await app.client.chat.postMessage({
@@ -253,10 +253,10 @@ app.action(
     try {
       await ack();
       if (appointment.isLocked) {
-        await app.client.chat.postMessage({
+        await app.client.chat.postEphemeral({
           channel: channel.id,
           token: process.env.SLACK_BOT_TOKEN,
-          // user: user.id,
+          user: user.id,
           blocks: view.잠금안내(),
         });
         return;
@@ -281,10 +281,10 @@ app.action(
     try {
       await ack();
       if (appointment.isLocked) {
-        await app.client.chat.postMessage({
+        await app.client.chat.postEphemeral({
           channel: channel.id,
           token: process.env.SLACK_BOT_TOKEN,
-          // user: user.id,
+          user: user.id,
           blocks: view.잠금안내(),
         });
         return;
@@ -310,10 +310,10 @@ app.action(ACTION_TYPES.잠금해제, async ({ ack, body: { channel, user } }) =
     appointment.endDate = addDays(new Date(), 14);
     appointment.isLocked = false;
 
-    await app.client.chat.postMessage({
+    await app.client.chat.postEphemeral({
       channel: channel.id,
       token: process.env.SLACK_BOT_TOKEN,
-      // user: user.id,
+      user: user.id,
       blocks: view.날짜세팅안내(),
     });
     await app.client.chat.postMessage({
