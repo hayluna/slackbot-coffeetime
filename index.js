@@ -18,20 +18,20 @@ app.command('/coffee', async ({ command, ack, say }) => {
   try {
     // Acknowledge command request
     await ack();
-    if (
-      command.channel_id !== process.env.SLACK_CHANNEL_ID_TEST &&
-      command.channel_id !== process.env.SLACK_CHANNEL_ID_NEW_MATHFLAT
-    ) {
-      await app.client.chat.postEphemeral({
-        channel: command.channel_id,
-        token: process.env.SLACK_BOT_TOKEN,
-        user: command.user_id,
-        blocks: view.로그(
-          '현재 커피타임은 뉴매쓰플랫 채널에서만 운영하고 있습니다 😇'
-        ),
-      });
-      return;
-    }
+    // if (
+    //   command.channel_id !== process.env.SLACK_CHANNEL_ID_TEST &&
+    //   command.channel_id !== process.env.SLACK_CHANNEL_ID_NEW_MATHFLAT
+    // ) {
+    //   await app.client.chat.postEphemeral({
+    //     channel: command.channel_id,
+    //     token: process.env.SLACK_BOT_TOKEN,
+    //     user: command.user_id,
+    //     blocks: view.로그(
+    //       '현재 커피타임은 뉴매쓰플랫 채널에서만 운영하고 있습니다 😇'
+    //     ),
+    //   });
+    //   return;
+    // }
     if (command.text) {
       switch (command.text) {
         case 'set': {
@@ -64,7 +64,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
               channel: process.env.SLACK_CHANNEL_ID_TEST,
               token: process.env.SLACK_BOT_TOKEN,
               blocks: view.로그(
-                `채널 ${command.channel_name}에서 @${command.user_name}쌤이 잠금된 일정을 조회하셨습니다.`
+                `채널 ${command.channel_name}에서 @${command.user_name}님이 잠금된 일정을 조회하셨습니다.`
               ),
             });
             return;
@@ -83,7 +83,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
             channel: process.env.SLACK_CHANNEL_ID_TEST,
             token: process.env.SLACK_BOT_TOKEN,
             blocks: view.로그(
-              `채널 ${command.channel_name}에서 @${command.user_name}쌤이 날싸세팅을 시작하셨습니다.`
+              `채널 ${command.channel_name}에서 @${command.user_name}님이 날싸세팅을 시작하셨습니다.`
             ),
           });
           return;
@@ -126,7 +126,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
                     channel: process.env.SLACK_CHANNEL_ID_TEST,
                     token: process.env.SLACK_BOT_TOKEN,
                     blocks: view.로그(
-                      `채널 ${command.channel_name}에서 @${command.user_name}쌤이 init하셨습니다.`
+                      `채널 ${command.channel_name}에서 @${command.user_name}님이 init하셨습니다.`
                     ),
                   });
                   return;
@@ -141,7 +141,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
                   channel: process.env.SLACK_CHANNEL_ID_TEST,
                   token: process.env.SLACK_BOT_TOKEN,
                   blocks: view.로그(
-                    `채널 ${command.channel_name}에서 @${command.user_name}쌤이 멤버등록(init)을 하셨으나 실패하였습니다.`
+                    `채널 ${command.channel_name}에서 @${command.user_name}님이 멤버등록(init)을 하셨으나 실패하였습니다.`
                   ),
                 });
               });
@@ -151,7 +151,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
             channel: process.env.SLACK_CHANNEL_ID_TEST,
             token: process.env.SLACK_BOT_TOKEN,
             blocks: view.로그(
-              `채널 ${command.channel_name}에서 @${command.user_name}쌤이 멤버등록(init)을 하셨으나 실패하였습니다.`
+              `채널 ${command.channel_name}에서 @${command.user_name}님이 멤버등록(init)을 하셨으나 실패하였습니다.`
             ),
           });
           return;
@@ -183,7 +183,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
                     channel: process.env.SLACK_CHANNEL_ID_TEST,
                     token: process.env.SLACK_BOT_TOKEN,
                     blocks: view.로그(
-                      `채널 ${command.channel_name}에서 @${command.user_name}쌤이 채널을 조회하셨습니다.\n채널 아이디 : ${command.channel_id}\n유저 아이디 : ${command.user_id}\n유저 이름: ${command.user_name}`
+                      `채널 ${command.channel_name}에서 @${command.user_name}님이 채널을 조회하셨습니다.\n채널 아이디 : ${command.channel_id}\n유저 아이디 : ${command.user_id}\n유저 이름: ${command.user_name}`
                     ),
                   });
                 }
@@ -195,7 +195,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
                   channel: process.env.SLACK_CHANNEL_ID_TEST,
                   token: process.env.SLACK_BOT_TOKEN,
                   blocks: view.로그(
-                    `채널 ${command.channel_name}에서 @${command.user_name}쌤이 멤버를 조회에 실패하셨습니다.`
+                    `채널 ${command.channel_name}에서 @${command.user_name}님이 멤버를 조회에 실패하셨습니다.`
                   ),
                 });
               });
@@ -216,7 +216,7 @@ app.command('/coffee', async ({ command, ack, say }) => {
               channel: process.env.SLACK_CHANNEL_ID_TEST,
               token: process.env.SLACK_BOT_TOKEN,
               blocks: view.로그(
-                `채널 ${command.channel_name}에서 @${command.user_name}쌤이 커피멤버를 조회하셨습니다.\n채널 아이디 : ${command.channel_id}\n유저 아이디 : ${command.user_id}\n유저 이름: @${command.user_id}`
+                `채널 ${command.channel_name}에서 @${command.user_name}님이 커피멤버를 조회하셨습니다.\n채널 아이디 : ${command.channel_id}\n유저 아이디 : ${command.user_id}\n유저 이름: @${command.user_id}`
               ),
             });
             return;
@@ -268,7 +268,7 @@ app.action(
         channel: process.env.SLACK_CHANNEL_ID_TEST,
         token: process.env.SLACK_BOT_TOKEN,
         blocks: view.로그(
-          `채널 ${channel.name}에서 @${user.name}쌤이 시작날짜설정에 실패하셨습니다.`
+          `채널 ${channel.name}에서 @${user.name}님이 시작날짜설정에 실패하셨습니다.`
         ),
       });
     }
@@ -296,7 +296,7 @@ app.action(
         channel: process.env.SLACK_CHANNEL_ID_TEST,
         token: process.env.SLACK_BOT_TOKEN,
         blocks: view.로그(
-          `채널 ${channel.name}에서 @${user.name}쌤이 마지막날짜설정에 실패하셨습니다.`
+          `채널 ${channel.name}에서 @${user.name}님이 마지막날짜설정에 실패하셨습니다.`
         ),
       });
     }
@@ -320,7 +320,7 @@ app.action(ACTION_TYPES.잠금해제, async ({ ack, body: { channel, user } }) =
       channel: process.env.SLACK_CHANNEL_ID_TEST,
       token: process.env.SLACK_BOT_TOKEN,
       blocks: view.로그(
-        `채널 ${channel.name}에서 @${user.name}쌤이 잠금해제하셨습니다.`
+        `채널 ${channel.name}에서 @${user.name}님이 잠금해제하셨습니다.`
       ),
     });
   } catch (e) {
@@ -329,7 +329,7 @@ app.action(ACTION_TYPES.잠금해제, async ({ ack, body: { channel, user } }) =
       channel: process.env.SLACK_CHANNEL_ID_TEST,
       token: process.env.SLACK_BOT_TOKEN,
       blocks: view.로그(
-        `채널 ${channel.name}에서 @${user.name}쌤이 잠금해제에 실패하셨습니다.`
+        `채널 ${channel.name}에서 @${user.name}님이 잠금해제에 실패하셨습니다.`
       ),
     });
   }
@@ -344,7 +344,7 @@ app.action(ACTION_TYPES.잠금, async ({ say, ack, body: { channel, user } }) =>
         channel: process.env.SLACK_CHANNEL_ID_TEST,
         token: process.env.SLACK_BOT_TOKEN,
         blocks: view.로그(
-          `채널 ${channel.name}에서 @${user.name}쌤이 날짜를 잘못설정하여 실패하셨습니다.`
+          `채널 ${channel.name}에서 @${user.name}님이 날짜를 잘못설정하여 실패하셨습니다.`
         ),
       });
       return;
@@ -372,7 +372,7 @@ app.action(ACTION_TYPES.잠금, async ({ say, ack, body: { channel, user } }) =>
       channel: process.env.SLACK_CHANNEL_ID_TEST,
       token: process.env.SLACK_BOT_TOKEN,
       blocks: view.로그(
-        `채널 ${channel.name}에서 @${user.name}쌤이 새로운 커피타임을 설정하셨습니다.`
+        `채널 ${channel.name}에서 @${user.name}님이 새로운 커피타임을 설정하셨습니다.`
       ),
     });
   } catch (e) {
@@ -381,7 +381,7 @@ app.action(ACTION_TYPES.잠금, async ({ say, ack, body: { channel, user } }) =>
       channel: process.env.SLACK_CHANNEL_ID_TEST,
       token: process.env.SLACK_BOT_TOKEN,
       blocks: view.로그(
-        `채널 ${name}에서 @${user.name}쌤이 잠금에 실패하셨습니다.`
+        `채널 ${name}에서 @${user.name}님이 잠금에 실패하셨습니다.`
       ),
     });
   }
