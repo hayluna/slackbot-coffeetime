@@ -5,7 +5,7 @@ function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
-const CORONA_LIMIT = 5;
+const CORONA_LIMIT = 4;
 const 요일 = ['월', '화', '수', '목', '금'];
 
 class Appointment {
