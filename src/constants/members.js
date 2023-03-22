@@ -19,7 +19,7 @@ const members = [
 ];
 
 const memberSet = new Set([...members]);
-const excludedMembers = ["coffeetime", "유시온", "명혜은", "박종대"];
+const excludedMembers = ["coffeetime", "유시온", "김하늘"];
 
 const excludedMemberSet = new Set([...excludedMembers]);
 
