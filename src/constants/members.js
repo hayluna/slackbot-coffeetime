@@ -19,7 +19,7 @@ const members = [
 ];
 
 const memberSet = new Set([...members]);
-const excludedMembers = ["coffeetime", "정운교", "Ahram Chang"];
+const excludedMembers = ["coffeetime", "Ahram Chang"];
 
 const excludedMemberSet = new Set([...excludedMembers]);
 

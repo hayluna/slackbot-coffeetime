@@ -12,6 +12,7 @@
   "dependencies": {
     "@slack/bolt": "^3.3.0",
     "date-fns": "^2.21.3",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.22"
   }
 }
